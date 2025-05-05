@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base Page</title>
+</head>
+<body>
+    <h1>Welcome to Your Dashboard</h1>
+
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.email }}!</p>
+        <a href="{% url 'account_logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'account_login' %}">Login</a> | <a href="{% url 'account_signup' %}">Sign Up</a>
+    {% endif %}
+</body>
+</html>
