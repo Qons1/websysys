@@ -1,17 +1,21 @@
 {% extends "account/base.html" %}
+{% load socialaccount %}
 
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<h2>Sign Up</h2>
-<form method="post" action="{% url 'account_signup' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
-</form>
+<div id="main-content">
+    <h2>Join Greenthreads</h2>
+    <form method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="auth-btn">Sign Up</button>
+    </form>
 
-<hr>
-<h3>Sign up with:</h3>
-<a href="{% provider_login_url 'google' %}">Google</a><br>
-<a href="{% provider_login_url 'facebook' %}">Facebook</a>
+    <p style="margin-top: 1em;">Or sign up with:</p>
+    <div class="auth-buttons">
+        <a href="{% provider_login_url 'google' %}" class="auth-btn">Google</a>
+        <a href="{% provider_login_url 'facebook' %}" class="auth-btn">Facebook</a>
+    </div>
+</div>
 {% endblock %}
