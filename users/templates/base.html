@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Greenthreads Thrift Shop{% endblock %}</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            background-color: rgb(241, 231, 231);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .sidebar {
+            width: 150px;
+            background-color: rgba(0, 128, 0, 0.7);
+            color: white;
+            height: 100vh;
+            padding-top: 30px;
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 10px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #a8d08d;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            padding-bottom: 3px;
+            white-space: nowrap;
+        }
+
+        .main-content {
+            margin-left: 150px;
+            width: calc(100% - 150px);
+            padding: 40px;
+        }
+
+        nav {
+            background-color: rgba(0, 128, 0, 0.7);
+            padding: 15px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #a8d08d;
+        }
+
+        .cart-icon {
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-icon:hover {
+            color: #a8d08d;
+        }
+
+        .cart-icon::after {
+            content: none;
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #ff0000;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 2px 6px;
+        }
+
+        footer {
+            background-color: rgba(0, 128, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+            color: #a8d08d;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">Greenthreads</div>
+    </div>
+
+    <div class="main-content">
+        <nav>
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'account_login' %}">Sign In</a>
+            <a href="{% url 'account_signup' %}">Sign Up</a>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+        </nav>
+
+        {% block content %}
+        
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Greenthreads Thrift Shop. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

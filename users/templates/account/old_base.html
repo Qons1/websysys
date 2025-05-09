@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenthreads</title>
+
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        /* Background image and green overlay */
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            background: url('https://raineclothing.com/cdn/shop/articles/eco_friendly_fashion_terms.jpg?v=1688895848') no-repeat center center fixed;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Greenish transparent overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 128, 0, 0.4); /* Green overlay */
+            z-index: -1; /* Ensures overlay is below content */
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 128, 0, 0.7);
+            padding: 20px 0;
+            text-align: center;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #a8d08d; /* Light green */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Main content section */
+        #main-content {
+            margin-top: 250px; /* Adjusted to allow space for the header */
+            text-align: center;
+            color: black;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9); /* Glassy effect */
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: 250px auto; /* Adjust for header space */
+        }
+
+        .auth-buttons {
+            margin-top: 30px;
+        }
+
+        .auth-btn {
+            text-decoration: none;
+            padding: 12px 20px;
+            background-color: #66b266; /* Fresh green */
+            color: white;
+            border-radius: 5px;
+            margin: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s ease;
+        }
+
+        .auth-btn:hover {
+            background-color: #4b9e4b; /* Darker green on hover */
+        }
+
+        footer {
+            background-color: rgba(0, 128, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+            color: #a8d08d;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            font-size: 1.2rem;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Greenthreads</h1>
+    </header>
+
+    <div id="main-content">
+        <h2>Welcome to Greenthreads</h2>
+        <p>Join us to explore a world of eco-friendly fashion!</p>
+
+        <div class="auth-buttons">
+            <a href="{% url 'account_login' %}" class="auth-btn">Sign In</a> |
+            <a href="{% url 'account_signup' %}" class="auth-btn">Sign Up</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; WebSys 2 Project.</p>
+    </footer>
+</body>
+</html>
