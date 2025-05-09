@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # Homepage (base page)
-    path('', TemplateView.as_view(template_name='account/base.html'), name='home'),
+    path('', TemplateView.as_view(template_name='base.html'), name='home'),
 
     # Allauth URLs for authentication
     path('accounts/', include('allauth.urls')),

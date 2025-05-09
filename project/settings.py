@@ -7,6 +7,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+
     # Django default apps
     'django.contrib.admin',
     'django.contrib.auth',
