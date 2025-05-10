@@ -25,7 +25,9 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='base.html'), name='home'),
 
     # Allauth URLs for authentication
-    path('accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),\
+    
+    path('users/', include('users.urls')),
 
     # Optional: add custom user profile or dashboard
     # path('profile/', include('users.urls')),  # Uncomment if you have a profile page
