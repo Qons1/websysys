@@ -39,15 +39,58 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_REDIRECT_URL = '/'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 
+# Email configuration (for development)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Optional: Enable email authentication
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# Social account settings
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': '',
-            'secret': '',
-            'key': ''
+            'client_id': '',  # Add your Google OAuth client ID
+            'secret': '',     # Add your Google OAuth secret
+            'key': ''         # Add your Google OAuth key
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
         }
+    },
+    'facebook': {
+        'APP': {
+            'client_id': '',  # Add your Facebook OAuth client ID
+            'secret': '',     # Add your Facebook OAuth secret
+        },
+        'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time',
+        ],
+        'EXCHANGE_TOKEN': True,
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v13.0',
     }
 }
 
@@ -106,21 +149,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# ✅ Allauth Config
-SITE_ID = 1
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
-
-LOGIN_REDIRECT_URL = '/'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
-
-# Optional: Enable email authentication
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 # Media settings (for badge images)
 MEDIA_URL = '/media/'

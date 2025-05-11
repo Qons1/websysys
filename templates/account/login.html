@@ -1,10 +1,10 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 {% load socialaccount %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div id="main-content">
+<div class="auth-form">
     <h2>Login to Greenthreads</h2>
     <form method="post" action="{% url 'account_login' %}">
         {% csrf_token %}
@@ -12,10 +12,12 @@
         <button type="submit" class="auth-btn">Login</button>
     </form>
 
-    <p style="margin-top: 1em;">Or log in with:</p>
+    <p>Or log in with:</p>
     <div class="auth-buttons">
         <a href="{% provider_login_url 'google' %}" class="auth-btn">Google</a>
         <a href="{% provider_login_url 'facebook' %}" class="auth-btn">Facebook</a>
     </div>
+    
+    <p>Don't have an account? <a href="{% url 'account_signup' %}">Sign up</a></p>
 </div>
 {% endblock %}
