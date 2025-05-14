@@ -1,5 +1,11 @@
 from pathlib import Path
 
+from pathlib import Path
+
+from environ import Env
+env = Env()
+env.read_env()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-@ez+sb!e)(5#n(so0gd#k8^i6sj7#7n=7waf_ryy@)h&(=wef'
@@ -54,8 +60,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'APP': {
-            'client_id': '',  # Add your Google OAuth client ID
-            'secret': '',     # Add your Google OAuth secret
+            'client_id': env('OAUTH_GOOGLE_CLIENT_ID'),  # Add your Google OAuth client ID
+            'secret': env('OAUTH_GOOGLE_SECRET'),     # Add your Google OAuth secret
             'key': ''         # Add your Google OAuth key
         },
         'SCOPE': [

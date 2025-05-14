@@ -181,7 +181,7 @@
 
         footer {
             background-color: rgba(0, 128, 0, 0.7);
-            padding: 20px;
+            padding: 2px;
             text-align: center;
             color: #a8d08d;
             position: fixed;
@@ -202,8 +202,13 @@
     <div class="main-content">
         <nav>
             <a href="{% url 'home' %}">Home</a>
-            <a href="{% url 'account_login' %}">Log in</a>
-            <a href="{% url 'account_signup' %}">Sign Up</a>
+            {% if user.is_authenticated %}
+                <a href="#" style="color: white; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">{{ user.username }}</a>
+                <a href="{% url 'account_logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'account_login' %}">Login</a>
+                <a href="{% url 'account_signup' %}">Sign Up</a>
+            {% endif %}
             <div class="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
             </div>
