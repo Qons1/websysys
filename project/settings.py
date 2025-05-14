@@ -74,8 +74,8 @@ SOCIALACCOUNT_PROVIDERS = {
     },
     'facebook': {
         'APP': {
-            'client_id': '',  # Add your Facebook OAuth client ID
-            'secret': '',     # Add your Facebook OAuth secret
+            'client_id':,  # Add your Facebook OAuth client ID
+            'secret':,     # Add your Facebook OAuth secret
         },
         'METHOD': 'oauth2',
         'SCOPE': ['email', 'public_profile'],
