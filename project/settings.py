@@ -55,7 +55,21 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+# Add a setting to track authentication method
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http'
+# Add this to allow immediate login without email verification
+ACCOUNT_CONFIRM_EMAIL_ON_GET = False
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
+ACCOUNT_SESSION_REMEMBER = True
+
+# Use custom forms and adapters
+ACCOUNT_FORMS = {
+    'signup': 'users.forms.CustomSignupForm',
+}
+ACCOUNT_ADAPTER = 'users.forms.CustomAccountAdapter'
 
 # Social account settings
 SOCIALACCOUNT_PROVIDERS = {

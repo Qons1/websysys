@@ -23,6 +23,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     badge_level = models.PositiveIntegerField(default=0)
     is_google_user = models.BooleanField(default=False)
+    is_regular_account = models.BooleanField(default=False)
     post_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
@@ -30,6 +31,11 @@ class UserProfile(models.Model):
     
     def calculate_badge_level(self):
         """Calculate badge level based on post count"""
+        if self.is_regular_account and not self.is_google_user:
+            self.badge_level = 0
+            self.save()
+            return 0
+            
         self.badge_level = 1 + (self.post_count // 5)
         self.save()
         return self.badge_level
@@ -49,5 +55,9 @@ def create_user_profile(sender, instance, created, **kwargs):
                 profile.badge_level = 1  # Start at level 1
             profile.save()
             print(f"Updated profile for Google user: {instance.username}")
+        else:
+            profile.is_regular_account = True
+            profile.badge_level = 0
+            profile.save()
     except Exception as e:
         print(f"Error checking for Google account: {e}")
