@@ -203,7 +203,12 @@
         <nav>
             <a href="{% url 'home' %}">Home</a>
             {% if user.is_authenticated %}
-                <a href="#" style="color: white; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">{{ user.username }}</a>
+                <a href="#" style="color: white; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center;">
+                    {{ user.username }}
+                    {% if user.profile.is_google_user or user.profile.badge_level > 0 %}
+                        <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background-color: #f1c40f; color: #333; border-radius: 50%; font-size: 0.9rem; margin-left: 8px; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.2);">{{ user.profile.badge_level|default:"1" }}</span>
+                    {% endif %}
+                </a>
                 <a href="{% url 'items_list' %}">Items</a>
                 <a href="{% url 'account_logout' %}">Logout</a>
             {% else %}

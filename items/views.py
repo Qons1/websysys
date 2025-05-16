@@ -8,6 +8,7 @@ import datetime
 from .forms import ItemForm
 from .models import Item
 from .db import get_collection_handle
+from users.models import UserProfile
 
 def items_list(request):
     collection, client = get_collection_handle('items')
@@ -53,6 +54,7 @@ def create_item(request):
                 price=price,
                 image=image,
                 user_id=request.user.id,
+                username=request.user.username,
                 created_at=datetime.datetime.now()
             )
             
@@ -60,6 +62,15 @@ def create_item(request):
             collection, client = get_collection_handle('items')
             collection.insert_one(item.to_mongo())
             client.close()
+            
+            # Update user's post count and badge level if they're a Google user
+            try:
+                profile, created = UserProfile.objects.get_or_create(user=request.user)
+                if profile.is_google_user:
+                    profile.post_count += 1
+                    profile.calculate_badge_level()
+            except Exception as e:
+                print(f"Error updating badge: {e}")
             
             return redirect('items_list')
     else:
