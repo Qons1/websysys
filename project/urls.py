@@ -29,6 +29,9 @@ urlpatterns = [
     
     path('users/', include('users.urls')),
 
+    # Items URLs
+    path('items/', include('items.urls')),
+
     # Optional: add custom user profile or dashboard
     # path('profile/', include('users.urls')),  # Uncomment if you have a profile page
 ]

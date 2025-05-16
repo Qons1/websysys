@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ action }} Item{% endblock %}
+
+{% block content %}
+<div style="padding: 20px; max-width: 800px; margin: 0 auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h1 style="margin: 0;">{{ action }} Item</h1>
+        <a href="{% url 'items_list' %}" style="background-color: #3498db; color: white; padding: 10px 15px; border-radius: 4px; text-decoration: none;">Back to Items</a>
+    </div>
+
+    <div style="background-color: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <form method="post">
+            {% csrf_token %}
+            
+            <div style="margin-bottom: 20px;">
+                <label for="id_name" style="display: block; margin-bottom: 5px; font-weight: bold;">Name:</label>
+                {{ form.name }}
+                {% if form.name.errors %}
+                    <p style="color: #e74c3c; margin-top: 5px;">{{ form.name.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label for="id_description" style="display: block; margin-bottom: 5px; font-weight: bold;">Description:</label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <p style="color: #e74c3c; margin-top: 5px;">{{ form.description.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label for="id_price" style="display: block; margin-bottom: 5px; font-weight: bold;">Price ($):</label>
+                {{ form.price }}
+                {% if form.price.errors %}
+                    <p style="color: #e74c3c; margin-top: 5px;">{{ form.price.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label for="id_image" style="display: block; margin-bottom: 5px; font-weight: bold;">Image URL (optional):</label>
+                {{ form.image }}
+                {% if form.image.errors %}
+                    <p style="color: #e74c3c; margin-top: 5px;">{{ form.image.errors.0 }}</p>
+                {% endif %}
+                <p style="color: #666; margin-top: 5px; font-size: 0.9rem;">Enter a URL to an image (e.g., https://example.com/image.jpg)</p>
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-top: 30px;">
+                <button type="submit" style="flex: 1; background-color: #2ecc71; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">{{ action }} Item</button>
+                <a href="{% url 'items_list' %}" style="flex: 1; background-color: #e74c3c; color: white; padding: 10px 15px; border-radius: 4px; text-decoration: none; text-align: center; font-weight: bold;">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %} 

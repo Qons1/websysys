@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
 
     'users',
+    'items',
 ]
 
 SITE_ID = 1
@@ -159,3 +160,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Media settings (for badge images)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# MongoDB Atlas Settings
+MONGODB_URI = env('MONGODB_URI', default='mongodb+srv://yourusername:yourpassword@cluster0.mongodb.net/items_db?retryWrites=true&w=majority')
+MONGODB_DB = env('MONGODB_DB', default='items_db')
