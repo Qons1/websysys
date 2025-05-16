@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,51 +15,87 @@
             box-sizing: border-box;
         }
 
-        html, body {
+        html {
             height: 100%;
         }
 
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
-            background-color: rgb(241, 231, 231);
+            background-color: rgb(245, 245, 245);
             color: #333;
-            margin: 0;
-            padding: 0;
+            min-height: 100%;
             display: flex;
-            flex-direction: row;
-        }
-
-        .sidebar {
-            width: 150px;
-            background-color: rgba(0, 128, 0, 0.7);
-            color: white;
-            height: 100vh;
-            padding-top: 30px;
-            position: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-left: 10px;
-        }
-
-        .logo {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #a8d08d;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            writing-mode: vertical-rl;
-            transform: rotate(180deg);
-            padding-bottom: 3px;
-            white-space: nowrap;
+            flex-direction: column;
         }
 
         .main-content {
-            margin-left: 150px;
-            width: calc(100% - 150px);
-            padding: 40px;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Header and nav styles */
+        header {
+            background-color: rgba(0, 128, 0, 0.7);
+            padding: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo-text {
+            color: #a8d08d;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            padding: 15px 0;
+        }
+
+        nav a:hover {
+            color: #a8d08d;
+        }
+
+        .cart-icon {
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-icon:hover {
+            color: #a8d08d;
+        }
+
+        /* Content container */
+        .content-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
         }
 
         /* Auth form styles */
@@ -132,101 +169,211 @@
             text-decoration: underline;
         }
 
-        nav {
-            background-color: rgba(0, 128, 0, 0.7);
-            padding: 15px;
-            display: flex;
-            justify-content: flex-end;
-            gap: 30px;
-            align-items: center;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #a8d08d;
-        }
-
-        .cart-icon {
-            font-size: 1.5rem;
-            color: white;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .cart-icon:hover {
-            color: #a8d08d;
-        }
-
-        .cart-icon::after {
-            content: none;
-            position: absolute;
-            top: -5px;
-            right: -10px;
-            background-color: #ff0000;
-            color: white;
-            font-size: 0.9rem;
-            font-weight: bold;
-            border-radius: 50%;
-            padding: 2px 6px;
-        }
-
         footer {
             background-color: rgba(0, 128, 0, 0.7);
-            padding: 2px;
+            padding: 15px 0;
             text-align: center;
             color: #a8d08d;
-            position: fixed;
-            bottom: 0;
             width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
         }
 
         footer p {
+            font-size: 1rem;
+        }
+
+        /* Badge styles */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: #f1c40f;
+            color: #333;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            margin-left: 8px;
+            font-weight: bold;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* Home page styles */
+        .home-content {
+            text-align: center;
+        }
+
+        .welcome-section {
+            margin-bottom: 50px;
+            padding: 50px 20px;
+            background-color: rgba(46, 204, 113, 0.1);
+            border-radius: 10px;
+        }
+
+        .welcome-section h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .welcome-section p {
             font-size: 1.2rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .creators-section {
+            margin: 40px 0 60px;
+        }
+
+        .creators-section h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        .creators-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .creator-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            width: 280px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .creator-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .creator-image {
+            height: 250px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .creator-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .creator-card:hover .creator-image img {
+            transform: scale(1.05);
+        }
+
+        .placeholder-image {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eaeaea;
+        }
+
+        .placeholder-image i {
+            font-size: 80px;
+            color: #bbb;
+        }
+
+        .creator-card h3 {
+            margin: 20px 0 5px;
+            color: #2c3e50;
+            font-size: 1.4rem;
+        }
+
+        .creator-card p {
+            color: #777;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="logo">Greenthreads</div>
-    </div>
-
     <div class="main-content">
-        <nav>
-            <a href="{% url 'home' %}">Home</a>
-            {% if user.is_authenticated %}
-                <a href="#" style="color: white; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center;">
-                    {{ user.username }}
-                    {% if user.profile.is_google_user or user.profile.badge_level > 0 %}
-                        <span style="display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background-color: #f1c40f; color: #333; border-radius: 50%; font-size: 0.9rem; margin-left: 8px; font-weight: bold; box-shadow: 0 1px 3px rgba(0,0,0,0.2);">{{ user.profile.badge_level|default:"1" }}</span>
+        <header>
+            <div class="header-container">
+                <div class="logo-text">Greenthreads</div>
+                <nav>
+                    <a href="{% url 'home' %}">Home</a>
+                    {% if user.is_authenticated %}
+                        <a href="#" style="display: flex; align-items: center;">
+                            {{ user.username }}
+                            {% if user.profile.is_google_user or user.profile.badge_level > 0 %}
+                                <span class="badge">{{ user.profile.badge_level|default:"1" }}</span>
+                            {% endif %}
+                        </a>
+                        <a href="{% url 'items_list' %}">Items</a>
+                        <a href="{% url 'account_logout' %}">Logout</a>
+                    {% else %}
+                        <a href="{% url 'account_login' %}">Login</a>
+                        <a href="{% url 'account_signup' %}">Sign Up</a>
                     {% endif %}
-                </a>
-                <a href="{% url 'items_list' %}">Items</a>
-                <a href="{% url 'account_logout' %}">Logout</a>
-            {% else %}
-                <a href="{% url 'account_login' %}">Login</a>
-                <a href="{% url 'account_signup' %}">Sign Up</a>
-            {% endif %}
-            <div class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </nav>
             </div>
-        </nav>
+        </header>
 
-        {% block content %}
-        
-        {% endblock %}
+        <div class="content-container">
+            {% block content %}
+            <div class="home-content">
+                <section class="welcome-section">
+                    <h1>Welcome to Greenthreads</h1>
+                    <p>Your sustainable thrift shop destination for eco-friendly fashion and more!</p>
+                </section>
+                
+                <section class="creators-section">
+                    <h2>Our Team</h2>
+                    <div class="creators-container">
+                        <div class="creator-card">
+                            <div class="creator-image">
+                                <!-- Replace with your actual image path -->
+                                <img src="{% static 'images/member2.jpg' %}" alt="John Patrick Rolloda">
+                            </div>
+                            <h3>Team Member 1</h3>
+                            <p>Jan Cassidy Castro</p>
+                        </div>
+                        
+                        <div class="creator-card">
+                            <div class="creator-image">
+                                <!-- Replace with your actual image path -->
+                                <img src="{% static 'images/member1.jpg' %}" alt="Jan Cassidy Castro">
+                            </div>
+                            <h3>Leader</h3>
+                            <p>John Patrick Rolloda</p>
+                        </div>
+                        
+                        <div class="creator-card">
+                            <div class="creator-image">
+                                <!-- Replace with your actual image path -->
+                                <img src="{% static 'images/member3.jpg' %}" alt="John David Orcajada">
+                            </div>
+                            <h3>Team Member 2</h3>
+                            <p>John David Orcajada</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            {% endblock %}
+        </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Greenthreads Thrift Shop. All Rights Reserved.</p>
+        <p>&copy; Greenthreads Thrift Shop Project sa technopreneurship at web sys</p>
     </footer>
 </body>
 </html>

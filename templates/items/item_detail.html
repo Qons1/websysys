@@ -4,56 +4,234 @@
 {% block title %}{{ item.name }}{% endblock %}
 
 {% block content %}
-<div style="padding: 20px; max-width: 1000px; margin: 0 auto;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h1 style="margin: 0;">Item Details</h1>
-        <a href="{% url 'items_list' %}" style="background-color: #3498db; color: white; padding: 10px 15px; border-radius: 4px; text-decoration: none;">Back to Items</a>
+<div class="item-detail-container">
+    <div class="item-detail-header">
+        <h1>Item Details</h1>
+        <a href="{% url 'items_list' %}" class="btn-back">Back to Items</a>
     </div>
 
-    <div style="background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-        <div style="display: flex; flex-wrap: wrap;">
+    <div class="item-detail-card">
+        <div class="item-detail-content">
             <!-- Item Image (left side) -->
-            <div style="flex: 1; min-width: 300px;">
+            <div class="item-detail-image">
                 {% if item.image %}
-                    <div style="height: 400px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                        <img src="{{ item.image }}" alt="{{ item.name }}" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
+                    <img src="{{ item.image }}" alt="{{ item.name }}">
                 {% else %}
-                    <div style="height: 400px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-image" style="font-size: 128px; color: #ddd;"></i>
+                    <div class="no-image">
+                        <i class="fas fa-image"></i>
                     </div>
                 {% endif %}
             </div>
             
             <!-- Item Details (right side) -->
-            <div style="flex: 1; min-width: 300px; padding: 30px;">
-                <h2 style="margin-bottom: 15px; font-size: 2rem;">{{ item.name }}</h2>
-                <p style="font-weight: bold; color: #2ecc71; margin-bottom: 20px; font-size: 1.5rem;">${{ item.price }}</p>
+            <div class="item-detail-info">
+                <h2 class="item-detail-title">{{ item.name }}</h2>
+                <p class="item-detail-price">${{ item.price }}</p>
                 
-                <div style="margin-bottom: 30px;">
-                    <h3 style="margin-bottom: 10px; color: #555;">Description</h3>
-                    <p style="line-height: 1.6; color: #666;">{{ item.description }}</p>
+                <div class="item-detail-description">
+                    <h3>Description</h3>
+                    <p>{{ item.description }}</p>
                 </div>
                 
-                <div style="margin-bottom: 20px;">
-                    <p style="font-size: 1.1rem; color: #555; display: flex; align-items: center;">
+                <div class="item-detail-poster">
+                    <p>
                         Posted by: <strong>{{ item.username }}</strong>
                         {% if user_badges|get_item:item.user_id %}
-                            <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background-color: #f1c40f; color: #333; border-radius: 50%; font-size: 0.9rem; margin-left: 8px; font-weight: bold;">{{ user_badges|get_item:item.user_id }}</span>
+                            <span class="badge-small">{{ user_badges|get_item:item.user_id }}</span>
                         {% endif %}
                     </p>
                 </div>
                 
-                <div style="display: flex; gap: 10px; margin-top: 30px;">
+                <div class="item-detail-actions">
                     {% if user.is_authenticated and user.id == item.user_id %}
-                        <a href="{% url 'update_item' item_id=item.id %}" style="flex: 1; background-color: #f39c12; color: white; padding: 12px 0; border-radius: 4px; text-decoration: none; text-align: center; font-weight: bold;">Edit Item</a>
-                        <a href="{% url 'delete_item' item_id=item.id %}" style="flex: 1; background-color: #e74c3c; color: white; padding: 12px 0; border-radius: 4px; text-decoration: none; text-align: center; font-weight: bold;">Delete Item</a>
+                        <a href="{% url 'update_item' item_id=item.id %}" class="btn-edit">Edit Item</a>
+                        <a href="{% url 'delete_item' item_id=item.id %}" class="btn-delete">Delete Item</a>
                     {% else %}
-                        <button style="flex: 1; background-color: #2ecc71; color: white; padding: 12px 0; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Add to Cart</button>
+                        <button class="btn-add">Add to Cart</button>
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    .item-detail-container {
+        margin-bottom: 40px;
+    }
+    
+    .item-detail-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+    
+    .item-detail-header h1 {
+        margin: 0;
+        font-size: 2.2rem;
+        color: #2c3e50;
+    }
+    
+    .btn-back {
+        background-color: #3498db;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        transition: background-color 0.2s;
+    }
+    
+    .btn-back:hover {
+        background-color: #2980b9;
+    }
+    
+    .item-detail-card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    
+    .item-detail-content {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .item-detail-image {
+        flex: 1;
+        min-width: 300px;
+        background-color: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 450px;
+    }
+    
+    .item-detail-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .no-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .no-image i {
+        font-size: 128px;
+        color: #ddd;
+    }
+    
+    .item-detail-info {
+        flex: 1;
+        min-width: 300px;
+        padding: 40px;
+    }
+    
+    .item-detail-title {
+        margin: 0 0 15px 0;
+        font-size: 2.2rem;
+        color: #2c3e50;
+    }
+    
+    .item-detail-price {
+        font-weight: bold;
+        color: #2ecc71;
+        font-size: 1.8rem;
+        margin: 0 0 25px 0;
+    }
+    
+    .item-detail-description {
+        margin-bottom: 30px;
+    }
+    
+    .item-detail-description h3 {
+        margin-bottom: 15px;
+        color: #555;
+        font-size: 1.4rem;
+    }
+    
+    .item-detail-description p {
+        color: #666;
+        line-height: 1.7;
+        font-size: 1.1rem;
+    }
+    
+    .item-detail-poster {
+        margin-bottom: 30px;
+    }
+    
+    .item-detail-poster p {
+        font-size: 1.1rem;
+        color: #555;
+        display: flex;
+        align-items: center;
+    }
+    
+    .badge-small {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        background-color: #f1c40f;
+        color: #333;
+        border-radius: 50%;
+        font-size: 0.9rem;
+        margin-left: 8px;
+        font-weight: bold;
+    }
+    
+    .item-detail-actions {
+        display: flex;
+        gap: 15px;
+    }
+    
+    .btn-add, .btn-edit, .btn-delete {
+        flex: 1;
+        padding: 15px 0;
+        text-align: center;
+        border-radius: 6px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background-color 0.2s;
+        font-size: 1.1rem;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .btn-add {
+        background-color: #2ecc71;
+        color: white;
+    }
+    
+    .btn-add:hover {
+        background-color: #27ae60;
+    }
+    
+    .btn-edit {
+        background-color: #f39c12;
+        color: white;
+    }
+    
+    .btn-edit:hover {
+        background-color: #d35400;
+    }
+    
+    .btn-delete {
+        background-color: #e74c3c;
+        color: white;
+    }
+    
+    .btn-delete:hover {
+        background-color: #c0392b;
+    }
+</style>
 {% endblock %} 
